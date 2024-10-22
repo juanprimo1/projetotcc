@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface PizzaPedidosRepository extends JpaRepository<PizzaPedidos, Long> {
 
-    @Query(nativeQuery = true, value = "select PP.* " +
-            "from PEDIDOS P," +
-            "PIZZAPEDIDOS PP" +
-            "where " +
-            "P.usuario  = :usuario and " +
-            "PP.codigopedido = P.codigopedido and " +
-            "P.codigopedido = :codigoPedido and " +
-            "row_number = 1" +
-            "order by P.datapedido desc ")
+    @Query(nativeQuery = true, value = "select PP.* \n" +
+            "            from PEDIDOS P,\n" +
+            "            PIZZAPEDIDOS PP\n" +
+            "            where \n" +
+            "            P.usuario  = :usuario and \n" +
+            "            PP.codigopedido = P.codigopedido and \n" +
+            "            P.codigopedido = :codigoPedido \n" +
+            "            order by P.datapedido desc \n" +
+            "            limit 1")
     List<PizzaPedidos> getLastOrder(@Param("usuario") Long usuario, @Param("codigoPedido") Long codigoPedido);
 }

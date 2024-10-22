@@ -14,6 +14,7 @@ public class Bebidas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "CODIGOBEBIDA")
     private Long codigoBebida;
 
     @Column(name = "BEBIDA", nullable = false)

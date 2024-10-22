@@ -17,12 +17,12 @@ public class PizzaController {
 
     private final PizzaService pizzaService;
 
-    @PostMapping()
+    @PostMapping("")
     public ResponseEntity<Object> cadastrarPizza(@RequestBody Pizza pizza) {
         return new ResponseEntity<>(pizzaService.create(pizza), HttpStatus.CREATED);
     }
 
-    @GetMapping()
+    @GetMapping("")
     public ResponseEntity<List<Pizza>> getPizzas() {
         return new ResponseEntity<>(pizzaService.findAllPizzas(), HttpStatus.OK);
     }

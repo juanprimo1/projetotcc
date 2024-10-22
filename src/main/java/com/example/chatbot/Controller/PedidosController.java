@@ -1,5 +1,6 @@
 package com.example.chatbot.Controller;
 
+import com.example.chatbot.Model.DTO.PedidoDTO;
 import com.example.chatbot.Model.Pedidos;
 import com.example.chatbot.Service.PedidosService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class PedidosController {
 
     private final PedidosService pedidosService;
     @PostMapping()
-    public ResponseEntity<Object> postPedido(@RequestBody Pedidos pedido){
+    public ResponseEntity<Object> postPedido(@RequestBody PedidoDTO pedido){
         return new ResponseEntity<>(pedidosService.create(pedido), HttpStatus.CREATED);
     }
 

@@ -1,9 +1,6 @@
 package com.example.chatbot.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +11,8 @@ import lombok.Setter;
 public class PizzaPedidos {
 
     @Id
+    @Column(name = "IDPIZZAPEDIDOS")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPizzaPedido;
 
     @Column(name = "CODIGOPEDIDO")

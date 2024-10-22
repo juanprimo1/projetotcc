@@ -4,6 +4,7 @@ import com.example.chatbot.Model.DTO.UserConverter;
 import com.example.chatbot.Model.DTO.UserDTO;
 import com.example.chatbot.Model.Usuario;
 import com.example.chatbot.Repository.UsuarioRepository;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class UsuarioService {
 
     public Usuario registerUser(UserDTO usuario) {
         Usuario user = UserConverter.convertToUser(usuario);
-        Usuario userExists = findUser(usuario.getEmail());
+        Usuario userExists = findUserByEmail(usuario.getEmail());
 
         if (userExists != null)
             throw  new RuntimeException("Usuário já existente, faça login");
@@ -45,7 +46,11 @@ public class UsuarioService {
         return user;
     }
 
-    public Usuario findUser(String email) {
+    public Usuario findUser(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
+    public Usuario findUserByEmail(String email) {
         return usuarioRepository.findByEmail(email).orElse(null);
     }
 }

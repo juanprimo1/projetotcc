@@ -1,6 +1,7 @@
 package com.example.chatbot.Service;
 
 
+import com.example.chatbot.Model.DTO.PedidoDTO;
 import com.example.chatbot.Model.ItensPedido;
 import com.example.chatbot.Model.Pedidos;
 import com.example.chatbot.Model.PizzaPedidos;
@@ -9,6 +10,7 @@ import com.example.chatbot.Repository.PizzaPedidosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,15 +23,16 @@ public class PedidosService {
     private final PizzaService pizzaService;
     private final BebidasService bebidasService;
 
-    public Pedidos create(Pedidos pedidos) {
+    public Pedidos create(PedidoDTO pedidos) {
         Integer seqPedido = 1;
-        pedidos.setDataPedido(new Date());
-        if (pedidos.getValorPedido() != null)
+        Pedidos pedFinal = new Pedidos();
+
+        if (pedidos.getValorPedido() == null)
             throw new RuntimeException("Valor pedido não pode ser nulo!");
 
         for (ItensPedido item : pedidos.getItensPedido()) {
             PizzaPedidos pizzaPedidos = new PizzaPedidos();
-            pizzaPedidos.setCodigoPedido(pedidos.getCodigoPedido());
+            pizzaPedidos.setCodigoPedido(pedFinal.getCodigoPedido());
             pizzaPedidos.setSequenciaPedido(seqPedido.longValue());
             pizzaPedidos.setCodigopizza(item.getPizza().getCodigoPizza());
             pizzaPedidos.setCodigoBebida(item.getBebidas().getCodigoBebida());
@@ -37,12 +40,19 @@ public class PedidosService {
             pizzaPedidosRepository.save(pizzaPedidos);
         }
 
-        return pedidosRepository.save(pedidos);
+        pedFinal.setDataPedido(new Date());
+        pedFinal.setInformacaoAdicional(pedidos.getInformacaoAdigional());
+        pedFinal.setValorPedido(pedidos.getValorPedido());
+        pedFinal.setCodigoUsuario(pedidos.getCodigoUsuario());
+
+        return pedidosRepository.save(pedFinal);
     }
 
     public Pedidos repetirPedido(Long userId) {
         Pedidos ultimoPedido = pedidosRepository.getLastOrder(userId).orElseThrow(() -> new RuntimeException("Esse é o primeiro pedido deste usuário"));
         List<PizzaPedidos> itens =  pizzaPedidosRepository.getLastOrder(userId, ultimoPedido.getCodigoPedido());
+
+        ultimoPedido.setItensPedido(new ArrayList<>());
 
         itens.stream().forEach((i) -> {
             ItensPedido item = new ItensPedido();

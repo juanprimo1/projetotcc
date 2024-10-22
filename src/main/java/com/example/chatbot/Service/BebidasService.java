@@ -19,7 +19,7 @@ public class BebidasService {
         if (bebidasRepository.findByBebida(bebidas.getBebida()) != null) {
             throw new RuntimeException("Bebida já cadastrada!");
         }
-        bebidas.setDataCriacao(new Date());
+
         return bebidasRepository.save(bebidas);
     }
 

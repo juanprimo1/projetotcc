@@ -26,8 +26,8 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.loginUser(email, senha), HttpStatus.OK);
     }
 
-    @GetMapping("find/{email}")
-    public ResponseEntity<Usuario> getUser(String email){
-        return new ResponseEntity<>(usuarioService.findUser(email), HttpStatus.OK);
+    @GetMapping("find/{id}")
+    public ResponseEntity<Usuario> getUser(@PathVariable("id") Long id){
+        return new ResponseEntity<>(usuarioService.findUser(id), HttpStatus.OK);
     }
 }

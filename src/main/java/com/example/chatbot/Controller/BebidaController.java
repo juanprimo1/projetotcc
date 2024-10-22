@@ -1,6 +1,8 @@
 package com.example.chatbot.Controller;
 
 import com.example.chatbot.Model.Bebidas;
+import com.example.chatbot.Model.DTO.BebidaConverter;
+import com.example.chatbot.Model.DTO.BebidaDTO;
 import com.example.chatbot.Service.BebidasService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,8 +20,8 @@ public class BebidaController {
     private final BebidasService bebidasService;
 
     @PostMapping
-    public ResponseEntity<Bebidas> create(@RequestBody Bebidas bebida) {
-        return new ResponseEntity<>(bebidasService.create(bebida), HttpStatus.CREATED);
+    public ResponseEntity<Bebidas> create(@RequestBody BebidaDTO bebida) {
+        return new ResponseEntity<>(bebidasService.create(BebidaConverter.convertToBebida(bebida)), HttpStatus.CREATED);
     }
 
     @GetMapping
