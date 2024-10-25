@@ -6,6 +6,7 @@ import com.example.chatbot.Model.Usuario;
 import com.example.chatbot.Repository.UsuarioRepository;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
