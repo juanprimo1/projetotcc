@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -52,5 +53,17 @@ public class UsuarioService {
 
     public Usuario findUserByEmail(String email) {
         return usuarioRepository.findByEmail(email).orElse(null);
+    }
+
+    public List<Usuario> findAllUsers() {
+        return usuarioRepository.findAll();
+    }
+
+    public void userAdm(Long userId) {
+        Usuario user = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        user.setAdm(1L);
+        usuarioRepository.save(user);
     }
 }

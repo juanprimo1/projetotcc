@@ -41,7 +41,7 @@ public class PedidosService {
         }
 
         pedFinal.setDataPedido(new Date());
-        pedFinal.setInformacaoAdicional(pedidos.getInformacaoAdigional());
+        pedFinal.setInformacaoAdicional(pedidos.getInformacaoAdicional());
         pedFinal.setValorPedido(pedidos.getValorPedido());
         pedFinal.setCodigoUsuario(pedidos.getCodigoUsuario());
 

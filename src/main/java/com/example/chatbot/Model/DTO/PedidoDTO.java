@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor @AllArgsConstructor
 public class PedidoDTO implements Serializable {
 
-    private String informacaoAdigional;
+    private String informacaoAdicional;
     private Long valorPedido;
     private List<ItensPedido> itensPedido;
     private Long codigoUsuario;
