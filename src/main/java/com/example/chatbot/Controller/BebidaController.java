@@ -25,12 +25,18 @@ public class BebidaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Bebidas>> getPizzas() {
+    public ResponseEntity<List<BebidaDTO>> getBebidas() {
         return new ResponseEntity<>(bebidasService.getBebidas(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     ResponseEntity<Bebidas> findById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(bebidasService.findById(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
+        bebidasService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

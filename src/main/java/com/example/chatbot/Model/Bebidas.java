@@ -25,4 +25,7 @@ public class Bebidas {
 
     @Column(name = "DATACRIACAO")
     private Date dataCriacao;
+
+    @Column(name = "IMAGE")
+    private byte[] img;
 }

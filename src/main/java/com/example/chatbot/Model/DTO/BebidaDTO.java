@@ -11,6 +11,8 @@ import java.io.Serializable;
 @NoArgsConstructor @AllArgsConstructor
 public class BebidaDTO implements Serializable {
 
+    private Long codigoBebida;
     private String bebida;
     private Long valorBebida;
+    private String imgBebida;
 }

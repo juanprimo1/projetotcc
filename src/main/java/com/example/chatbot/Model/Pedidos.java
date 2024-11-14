@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,7 +20,7 @@ public class Pedidos {
     private Long codigoPedido;
 
     @Column(name = "VALORPEDIDO", nullable = false)
-    private Long valorPedido;
+    private BigDecimal valorPedido;
 
     @Column(name = "DATAPEDIDO")
     private Date dataPedido;

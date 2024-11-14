@@ -28,4 +28,7 @@ public class Pizza {
 
     @Column(name= "VALORPIZZA")
     private Long valorPizza;
+
+    @Column(name = "IMAGEM")
+    private byte[] imagem;
 }

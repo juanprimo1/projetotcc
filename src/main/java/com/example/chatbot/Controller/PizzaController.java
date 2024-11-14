@@ -1,5 +1,6 @@
 package com.example.chatbot.Controller;
 
+import com.example.chatbot.Model.DTO.PizzaDTO;
 import com.example.chatbot.Model.Pizza;
 import com.example.chatbot.Service.PizzaService;
 import lombok.RequiredArgsConstructor;
@@ -18,17 +19,23 @@ public class PizzaController {
     private final PizzaService pizzaService;
 
     @PostMapping("")
-    public ResponseEntity<Object> cadastrarPizza(@RequestBody Pizza pizza) {
+    public ResponseEntity<Object> cadastrarPizza(@RequestBody PizzaDTO pizza) {
         return new ResponseEntity<>(pizzaService.create(pizza), HttpStatus.CREATED);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Pizza>> getPizzas() {
+    public ResponseEntity<List<PizzaDTO>> getPizzas() {
         return new ResponseEntity<>(pizzaService.findAllPizzas(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Pizza> findById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(pizzaService.findById(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
+        pizzaService.deletePizza(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
