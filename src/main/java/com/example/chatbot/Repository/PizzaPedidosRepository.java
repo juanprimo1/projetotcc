@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PizzaPedidosRepository extends JpaRepository<PizzaPedidos, Long> {
@@ -23,4 +24,7 @@ public interface PizzaPedidosRepository extends JpaRepository<PizzaPedidos, Long
     List<PizzaPedidos> getLastOrder(@Param("usuario") Long usuario, @Param("codigoPedido") Long codigoPedido);
 
     List<PizzaPedidos> findAllByCodigoPedido(Long codigoPedido);
+
+    List<PizzaPedidos> findAllByCodigopizza(Long codigoPizza);
+    List<PizzaPedidos> findAllByCodigoBebida(Long codigoBebida);
 }

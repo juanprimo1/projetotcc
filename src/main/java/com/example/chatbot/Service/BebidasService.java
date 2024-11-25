@@ -3,6 +3,7 @@ package com.example.chatbot.Service;
 import com.example.chatbot.Model.Bebidas;
 import com.example.chatbot.Model.DTO.BebidaDTO;
 import com.example.chatbot.Repository.BebidasRepository;
+import com.example.chatbot.Repository.PizzaPedidosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class BebidasService {
 
     private final BebidasRepository bebidasRepository;
+    private final PizzaPedidosRepository pizzaPedidosRepository;
 
     public Bebidas create (Bebidas bebidas) {
 
@@ -47,6 +49,9 @@ public class BebidasService {
     }
 
     public void deleteById(Long id) {
+        if (!pizzaPedidosRepository.findAllByCodigoBebida(id).isEmpty())
+            throw new RuntimeException("Existem pedidos com essa bebida!");
+
         bebidasRepository.deleteById(id);
     }
 }
